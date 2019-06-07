@@ -46,13 +46,20 @@ for i in user_list_test:
 
     if i_strip in placeholder_list:
         test_index = user_list_test.index(i)
+
+        # Checks on wether it uses "a" or "an" when asking for the placeholder input.
         if i_strip[0].lower() in list_vowels:
             answer = input(f"Enter an {i_strip}: ")
         else:
             answer = input(f"Enter a {i_strip}: ")
         print(user_text_file_read)
 
-        if i[-1].lower() in alphabet_list:
+        # Checks if the previous word ends with a period so it can capitalize it.
+        if user_list_test[user_list_test.index(i) - 1][-1] == ".":
+            answer = answer.title()
+
+        # Checks if the word ends with a punctuation.
+        if i_last_letter.lower() in alphabet_list:
             user_list_test[test_index] = answer
         else:
             user_list_test[test_index] = answer + i_last_letter
@@ -67,8 +74,3 @@ print(user_list_test_joined)
 user_results_file.write(user_list_test_joined)
 user_text_file.close()
 user_results_file.close()
-
-# TODO: If placeholder is capital? 
-# Plan of attack for the todo above: find the word before the placeholder/word you're checking to capitalized and see if the previous word ends with a period. (I think this might work?)
-
-# This is the latest.
